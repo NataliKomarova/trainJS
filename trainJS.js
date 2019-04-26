@@ -160,13 +160,13 @@ function listToArray(list) {
 //console.log(listToArray(arrayToList(range(1, 9))));
 
 function prepend(list, elem) {
-    let newList = elem;
-    newList.next = list;
-    return newList;
+    //let newList = elem;
+    elem.next = list;
+    return elem;
 }
 
 // let newList = arrayToList(range(1, 9));
-// let newElem = arrayToList(range(1, 1));
+//  let newElem = arrayToList(range(1, 1));
 // newList = prepend(newList, newElem);
 // while (newList) {
 //     console.log(newList.value);
@@ -183,34 +183,24 @@ function nth(list, index) {
     return nth(list.next, index - 1);
 }
 
-// let newList = arrayToList(range(1, 9));
-// console.log(nth(newList, 5));
+//  let newList = arrayToList(range(1, 3));
+//  console.log(nth(newList, 1));
 
 function deepEqual(firstElem, secondElem) {
-    if (typeof (firstElem) == "object" && firstElem) {
-        if (typeof (secondElem) == "object" && secondElem) {
-            while (firstElem && secondElem) {
-                if (!(firstElem.value === secondElem.value)) {
-                    return false;
-                }
-                firstElem = firstElem.next;
-                secondElem = secondElem.next;
-            }
-            if (!firstElem && !secondElem) {
-                return true;
-            }
-            else return false;
-        }
-        else return false;
-    }
     if (firstElem === secondElem) {
         return true;
+    } else
+    if (typeof (firstElem) === "object" && firstElem && typeof (secondElem) === "object" && secondElem) {
+            if(Object.keys(firstElem).length != Object.keys(secondElem).length)
+                return false;
+            for(var element in firstElem)
+                if (!secondElem.hasOwnProperty(element) || !deepEqual(firstElem[element], secondElem[element]))
+                    return false;
     }
-    else return false;
-
+    else
+        return false;
+    return true;
 }
 
-let list1 = arrayToList(range(1, 9));
-let list2 = arrayToList(range(1, 7));
-
-console.log(deepEqual(null, null));
+ console.log(deepEqual([5, 6, 7], [5, 6, 0]));
+//console.log(deepEqual({'1': 1, '2': {'f':3}}, {'1': 1, '2': {'f':2}}));
