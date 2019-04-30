@@ -1,3 +1,4 @@
+//OK
 function triangleCycle() {
     let str = '';
     for (let i = 0; i < 7; i++) {
@@ -8,6 +9,7 @@ function triangleCycle() {
 
 //triangleCycle();
 
+//OK
 function FizzBuzz() {
     for (let i = 1; i <= 100; i++) {
         if (i % 3 == 0) {
@@ -26,50 +28,36 @@ function FizzBuzz() {
 
 function FizzBuzzPro() {
     for (let i = 1; i <= 100; i++) {
-        if ((i % 3 == 0) && (i % 5 == 0)) {
-            console.log('FizzBuzz');
+        let result = '';
+        if (i % 3 == 0) {
+            result = 'Fizz';
         }
-        else if (i % 3 == 0) {
-            console.log('Fizz');
+        if (i % 5 == 0) {
+            result += 'Buzz';
         }
-        else if (i % 5 == 0) {
-            console.log('Buzz');
+        if (!result) {
+            result = i;
         }
-        else {
-            console.log(i);
-        }
+        console.log(result);
     }
 }
 
-//FizzBuzzPro();
+// FizzBuzzPro();
 
-function chessBoard() {
+function chessBoard(a, b) {
     let str = '';
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-            if (i % 2 == 0) {
-                if (j % 2 == 0) {
-                    str += '#';
-                }
-                else {
-                    str += ' ';
-                }
-            } else {
-                if (j % 2 == 0) {
-                    str += ' ';
-                }
-                else {
-                    str += '#';
-                }
-            }
+    for (let i = 0; i < a; i++) {
+        for (let j = 0; j < b; j++) {
+            str += ((i + j) % 2 == 0) ? '#' : ' ';
         }
         str += '\n';
     }
     console.log(str);
 }
 
-//chessBoard();
+// chessBoard(8,8);
 
+//OK
 function isEven(n) {
     if (Number.isInteger(n)) {
         if (n < 0) {
@@ -89,48 +77,63 @@ function isEven(n) {
 
 //console.log(isEven(50));
 
+// function range(start, end) {
+//     let result = [];
+//     if (Number.isInteger(start) && Number.isInteger(end)) {
+//         if (start < end) {
+//             for (let i = start; i <= end; i++) {
+//                 result.push(i);
+//             }
+//         }
+//         else {
+//             for (let i = start; i >= end; i--) {
+//                 result.push(i);
+//             }
+//         }
+//     }
+//     return result;
+// }
+
+
 function range(start, end) {
     let result = [];
     if (Number.isInteger(start) && Number.isInteger(end)) {
-        for (let i = start; i <= end; i++) {
+        for (let i = start; start < end ? i <= end : i >= end; start < end ? i++ : i--) {
             result.push(i);
         }
     }
     return result;
 }
 
-//console.log(range(3, 13));
+// console.log(range(15, 13));
 
 function sum(arrayForSum) {
-    let result = 0;
-    arrayForSum.forEach(element => {
-        result += element;
-    });
-    return result;
+    return arrayForSum.reduce((accumulator, currentValue) =>
+        accumulator + currentValue);
 }
 
-//console.log(sum(range(6, 13)));
+// console.log(sum(range(3, 13)));
 
 function reverseArray(directOderArray) {
     let reverseOrderArray = [];
     for (let i = directOderArray.length - 1; i >= 0; i--) {
-        reverseOrderArray[directOderArray.length - 1 - i] = directOderArray[i];
+        reverseOrderArray.push(directOderArray[i]);
     }
     return reverseOrderArray;
 }
 
-//console.log(reverseArray(range(6, 13)));
+// console.log(reverseArray(range(6, 13)));
 
 function reverseArrayInPlace(arrayToReverse) {
-    for (let i = 0, j = arrayToReverse.length - 1; i < arrayToReverse.length / 2, j >= arrayToReverse.length / 2; i++ , j--) {
+    for (let i = 0; i < arrayToReverse.length / 2; i++) {
         let container = arrayToReverse[i];
-        arrayToReverse[i] = arrayToReverse[j];
-        arrayToReverse[j] = container;
+        arrayToReverse[i] = arrayToReverse[arrayToReverse.length - 1 - i];
+        arrayToReverse[arrayToReverse.length - 1 - i] = container;
     }
     return arrayToReverse;
 }
 
-//console.log(reverseArrayInPlace(range(1, 9)));
+// console.log(reverseArrayInPlace(range(2, 9)));
 
 function arrayToList(array) {
     let list = { next: null };
@@ -148,6 +151,7 @@ function arrayToList(array) {
 //     newList = newList.next;
 // }
 
+//OK
 function listToArray(list) {
     let array = [];
     while (list) {
@@ -159,8 +163,8 @@ function listToArray(list) {
 
 //console.log(listToArray(arrayToList(range(1, 9))));
 
+//OK
 function prepend(list, elem) {
-    //let newList = elem;
     elem.next = list;
     return elem;
 }
@@ -173,6 +177,7 @@ function prepend(list, elem) {
 //     newList = newList.next;
 // }
 
+//OK
 function nth(list, index) {
     if (!list) {
         return undefined;
@@ -186,21 +191,27 @@ function nth(list, index) {
 //  let newList = arrayToList(range(1, 3));
 //  console.log(nth(newList, 1));
 
+
+//OK
 function deepEqual(firstElem, secondElem) {
     if (firstElem === secondElem) {
         return true;
     } else
-    if (typeof (firstElem) === "object" && firstElem && typeof (secondElem) === "object" && secondElem) {
-            if(Object.keys(firstElem).length != Object.keys(secondElem).length)
+        if (typeof (firstElem) === "object" && firstElem && typeof (secondElem) === "object" && secondElem) {
+            if (Object.keys(firstElem).length != Object.keys(secondElem).length) {
                 return false;
-            for(var element in firstElem)
-                if (!secondElem.hasOwnProperty(element) || !deepEqual(firstElem[element], secondElem[element]))
+            }
+            for (var element in firstElem) {
+                if (!secondElem.hasOwnProperty(element) || !deepEqual(firstElem[element], secondElem[element])) {
                     return false;
-    }
-    else
-        return false;
+                }
+            }
+        }
+        else {
+            return false;
+        }
     return true;
 }
 
- console.log(deepEqual([5, 6, 7], [5, 6, 0]));
+// console.log(deepEqual([5, 6, 7], [5, 6, 0]));
 //console.log(deepEqual({'1': 1, '2': {'f':3}}, {'1': 1, '2': {'f':2}}));
